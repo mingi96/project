@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: #032541;
+}
+.header img {
+  margin-left: 20px;
+}
+.header a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.weather_title {
+  text-align: center;
+  padding-left: 25px;
+}
+
+.col-md-4 > h2 {
+  padding-top: 30px;
+}
+
+.img-fluid {
+  width: 150px;
+}
+
+.col-md-8 {
+  text-align: center;
+  padding-top: 25px;
+}
