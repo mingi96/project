@@ -50,7 +50,7 @@ $(".k-primary").click(function () {
       return;
     }
   }
-  alert(id + "\n" + email + "\n" + "회원가입 완료");
+  alert("아이디: " + id + "\n" + "이메일: " + email + "\n" + "회원가입 완료");
 });
 
 // 정규식
