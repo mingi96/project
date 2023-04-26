@@ -1,57 +1,35 @@
-function getWeather(lat, lon) {
-  var temp = {};
-  var openWeatherAPI =
-    "https://api.openweathermap.org/data/2.5/weather?appid=f98e648c60dee9415bd3b65e176b86ca&units=metric&lang=kr&lat=37.4495733&lon=126.7154219"; // city가 계속 붙으므로 url 초기화를 위해 반드시 넣어준다
+var topRated =
+  "https://api.themoviedb.org/3/movie/popular?api_key=609302939117d8d2b2dbeeb7381d9a00&language=ko-kr&page=1"; // city가 계속 붙으므로 url 초기화를 위해 반드시 넣어준다
 
-  $.ajax({
-    type: "GET",
-    url: openWeatherAPI,
-    dataType: "json",
-    async: false, // 결과 데이터를 리턴시키기 위해 동기 방식으로 변경
-    success: function (data) {
-      //정상 응답시 처리 작업
-      temp.celsius = data.main.temp.toFixed(0); // 소수점 버림;
-      temp.icon = data.weather[0].icon;
-    },
-    error: function (request, status, error) {
-      //응답 에러시 처리 작업
-      console.log("code:" + request.status);
-      console.log("message:" + request.responseText);
-      console.log("error:" + error);
-    },
-  });
-
-  console.log(temp);
-  return temp;
-}
-
-function getWeatherWithCity(city) {
-  var temp = {};
-  var openWeatherAPI =
-    "https://api.openweathermap.org/data/2.5/weather?appid=f98e648c60dee9415bd3b65e176b86ca&units=metric&lang=kr&q="; // city가 계속 붙으므로 url 초기화를 위해 반드시 넣어준다
-  openWeatherAPI += city;
-
-  $.ajax({
-    type: "GET",
-    url: openWeatherAPI,
-    dataType: "json",
-    async: false, // 결과 데이터를 리턴시키기 위해 동기 방식으로 변경
-    success: function (data) {
-      //정상 응답시 처리 작업
-      temp.celsius = data.main.temp.toFixed(0); // 소수점 버림;
-      temp.icon = data.weather[0].icon;
-    },
-    error: function (request, status, error) {
-      //응답 에러시 처리 작업
-      console.log("code:" + request.status);
-      console.log("message:" + request.responseText);
-      console.log("error:" + error);
-    },
-  });
-
-  console.log(temp);
-  return temp;
-}
+$.ajax({
+  type: "GET",
+  url: topRated,
+  dataType: "json",
+  async: false,
+  success: function (data) {
+    const results = data.results;
+    console.log(results);
+    console.log(data);
+    //   https://image.tmdb.org/t/p/w500/
+    for (const result of results) {
+      console.log("영화 포스터 : ", result.poster_path);
+      console.log("영화 아이디 : ", result.id);
+      for (var i = 0; i < 7; i++) {
+        $(`.card_top_${i}`).text(`${results[i].overview}`);
+        let imgURL = "https://image.tmdb.org/t/p/w500" + results[i].poster_path;
+        $(`.card_img_${i}`).append(
+          `<a href='./detail.html?id=${results[i].id}'><img src=${imgURL} style="width: 200px; padding: 10px" ;></a>`
+        );
+      }
+      return;
+    }
+  },
+  error: function (request, status, error) {
+    console.log("code:" + request.status);
+    console.log("message:" + request.responseText);
+    console.log("error:" + error);
+  },
+});
 
 var cityList = [
   "seoul",

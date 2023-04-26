@@ -17,7 +17,7 @@ console.log(q, krcity);
 function getCityweather(q) {
   var temp = {};
   var urlAPI =
-    "https://api.openweathermap.org/data/2.5/weather?appid=33d799f57064b1e93fd9f948acb95d63&units=metric&lang=kr";
+    "https://www.themoviedb.org/movie/${id}?api_key=609302939117d8d2b2dbeeb7381d9a00&language=ko-kr&page=1";
   urlAPI += "&q=" + q;
 
   $.ajax({
@@ -51,7 +51,5 @@ $(".feels_like").text(`${temp.feels_like}`);
 $(".humidity").text(`${temp.humidity}`);
 $(".wind_speed").text(`${temp.wind_speed}`);
 $(".clouds_all").text(`${temp.clouds_all}`);
-
-var iconURL = "https://openweathermap.org/img/wn/" + temp.icon + ".png";
 
 $(".img").attr("src", iconURL);
